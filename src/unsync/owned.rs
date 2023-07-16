@@ -12,7 +12,7 @@ impl<T, V> Sliceable<T> for V where V: AsRef<[T]> + AsMut<[T]> {}
 /// A non thread-safe interface for allocating chunks in an owned slice.
 pub struct SlicePool<T> {
   chain: Rc<ChunkChain>,
-  slice: Rc<Sliceable<T>>,
+  slice: Rc<dyn Sliceable<T>>,
 }
 
 impl<T: 'static> SlicePool<T> {
@@ -64,7 +64,7 @@ impl<T: 'static> SlicePool<T> {
 /// An allocation in an owned `SlicePool`.
 pub struct SliceBox<T: 'static> {
   #[allow(unused)]
-  slice: Rc<Sliceable<T>>,
+  slice: Rc<dyn Sliceable<T>>,
   chain: Rc<ChunkChain>,
   data: &'static mut [T],
 }

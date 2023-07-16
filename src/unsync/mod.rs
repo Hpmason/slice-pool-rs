@@ -2,7 +2,7 @@
 
 pub use self::owned::{SliceBox, SlicePool, Sliceable};
 use std::cell::RefCell;
-use Chunk;
+use crate::Chunk;
 
 mod owned;
 

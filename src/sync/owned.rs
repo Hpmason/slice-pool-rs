@@ -17,7 +17,7 @@ where
 /// A thread-safe interface for allocating chunks in an owned slice.
 pub struct SlicePool<T: Send> {
   chain: Arc<ChunkChain>,
-  slice: Arc<Sliceable<T>>,
+  slice: Arc<dyn Sliceable<T>>,
 }
 
 impl<T: Send + 'static> SlicePool<T> {
@@ -69,7 +69,7 @@ impl<T: Send + 'static> SlicePool<T> {
 /// An allocation in an owned `SlicePool`.
 pub struct SliceBox<T: Send + 'static> {
   #[allow(unused)]
-  slice: Arc<Sliceable<T>>,
+  slice: Arc<dyn Sliceable<T>>,
   chain: Arc<ChunkChain>,
   data: &'static mut [T],
 }
