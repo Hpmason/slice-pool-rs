@@ -78,12 +78,12 @@ impl<T: Send> Deref for SliceBox<T> {
   type Target = [T];
 
   fn deref(&self) -> &Self::Target {
-    &self.data
+    self.data
   }
 }
 
 impl<T: Send> DerefMut for SliceBox<T> {
-  fn deref_mut<'b>(&'b mut self) -> &'b mut [T] {
+  fn deref_mut(&mut self) -> &mut [T] {
     self.data
   }
 }
